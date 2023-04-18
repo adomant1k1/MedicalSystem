@@ -1,0 +1,12 @@
+<img
+        *ngIf="useImgTag"
+        [src]="src | static"
+        [style]="style"
+/>
+
+<div
+        *ngIf="!useImgTag"
+        [innerHTML]="svgIconHtml"
+        class="dynamic-icon-content"
+>
+</div>

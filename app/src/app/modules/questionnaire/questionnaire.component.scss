@@ -1,0 +1,41 @@
+.questionnaire-form {
+  padding: 0 24px;
+}
+
+.questionnaire-parameter-item {
+  display: flex;
+  flex-direction: column;
+
+  ::ng-deep mat-form-field {
+    margin-right: 16px;
+  }
+
+  .parameter-form-row {
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: row;
+
+    .option-form {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+}
+
+.gap-text {
+  margin-right: 50px;
+}
+
+.add-btn {
+  width: 40px;
+  height: 40px;
+}
+
+.flex-row {
+  margin-top: 48px;
+}
+
+.buttons {
+  margin-left: 24px;
+  margin-top: 48px;
+}

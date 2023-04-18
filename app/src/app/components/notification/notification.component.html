@@ -1,0 +1,70 @@
+<ng-container
+        *ngFor="let message of notificationService.currentMessage$ | async"
+>
+    <ng-container [ngSwitch]="message.severity">
+        <ng-container *ngSwitchCase="'error'">
+            <p-messages
+                    [severity]="message.severity || 'error'"
+                    class="messages-wrapper"
+            >
+                <ng-template pTemplate="error">
+                    <div class="messages-wrapper__content">
+                        <div class="flex flex-column">
+                            <p-accordion>
+                                <p-accordionTab [header]="message.summary || ''">
+                                    <pre [textContent]="message.detail"></pre>
+                                </p-accordionTab>
+                            </p-accordion>
+                        </div>
+                        <button
+                                (click)="notificationService.currentMessage$.next([])"
+                                pButton
+                                pRipple
+                                type="button"
+                                icon="pi pi-times"
+                                class="p-button-rounded p-button-danger p-button-text"
+                        ></button>
+                    </div>
+                </ng-template>
+            </p-messages>
+        </ng-container>
+        <ng-container *ngSwitchCase="'warn'">
+            <p-messages
+                    [severity]="message.severity || 'warn'"
+                    class="messages-wrapper"
+            >
+                <ng-template pTemplate="warn">
+                    <div class="messages-wrapper__content">
+                        <div class="flex flex-column">
+                            <div>{{ message.summary }}</div>
+                            <div>{{ message.detail }}</div>
+                        </div>
+                        <button
+                                (click)="notificationService.currentMessage$.next([])"
+                                pButton
+                                pRipple
+                                type="button"
+                                icon="pi pi-times"
+                                class="p-button-rounded p-button-warning p-button-text"
+                        ></button>
+                    </div>
+                </ng-template>
+            </p-messages>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+            <p-messages
+                    [severity]="message.severity || 'success'"
+                    class="messages-wrapper"
+            >
+                <ng-template pTemplate="default">
+                    <div class="messages-wrapper__content">
+                        <div class="flex flex-column">
+                            <div>{{ message.summary }}</div>
+                            <div>{{ message.detail }}</div>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-messages>
+        </ng-container>
+    </ng-container>
+</ng-container>

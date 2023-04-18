@@ -1,0 +1,38 @@
+<div class="title" mat-dialog-title>
+    <h2>
+        {{ action === 'create' ? 'Создание анкеты' :
+            action === 'edit'  ? 'Редактирование анкеты': '' }}
+    </h2>
+    <mat-icon class="cursor-pointer" (click)="close()">close</mat-icon>
+</div>
+
+<ng-container *ngIf="(loading$ | async) else content">
+    <p-progressSpinner class="absolute-center"></p-progressSpinner>
+</ng-container>
+
+<ng-template #content>
+    <div class="content-wrapper">
+        <ng-container *ngIf="questionnaire$ | async as questionnaire" [formGroup]="form">
+            <ng-container formArrayName="parameters">
+                <ng-container *ngFor="let parameterForm of $any(parameters.controls)" [formGroup]="parameterForm">
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field>
+                                <mat-label>{{ parameterForm.get('name').value }}</mat-label>
+                                <mat-select formControlName="value">
+                                    <mat-option *ngFor="let gender of parameterForm.get('options')?.value" [value]="gender.value">
+                                        {{ gender.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+    </div>
+</ng-template>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button mat-primary" (click)="save()">Сохранить</button>
+</mat-dialog-actions>

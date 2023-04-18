@@ -1,0 +1,68 @@
+<h1 class="page-title">
+    Справочники
+</h1>
+
+<ng-container *ngIf="(loading$ | async) else content">
+    <p-progressSpinner class="absolute-center"></p-progressSpinner>
+</ng-container>
+
+<ng-template #content>
+       <button
+               class="add-btn"
+               [style.margin-bottom.px]="24"
+               tooltipPosition="left"
+               [pTooltip]="'Добавить'"
+               pButton
+               (click)="addNew()">
+           <mat-icon>add_circle_outline</mat-icon>
+       </button>
+
+    <p-tabView [(activeIndex)]="tabIndex">
+        <p-tabPanel [tabIndex]="0" header="Должности">
+            <p-orderList
+                    [value]="(jobTitles$ | async) ?? []"
+                    [listStyle]="{'height':'auto'}"
+                    filterBy="label"
+                    filterPlaceholder="Поиск по названию">
+                <ng-template pTemplate="item" let-item>
+                    <div class="flex-row" [style.justify-content]="'space-between'">
+                        <div class="item">
+                            {{ item.label }}
+                        </div>
+
+                        <button
+                                [pTooltip]="'Удалить'"
+                                tooltipPosition="left"
+                                pButton
+                                (click)="delete(item.id)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </ng-template>
+            </p-orderList>
+        </p-tabPanel>
+        <p-tabPanel [tabIndex]="1" header="Организации">
+            <p-orderList
+                    [value]="(jobPlaces$ | async) ?? []"
+                    [listStyle]="{'height':'auto'}"
+                    filterBy="label"
+                    filterPlaceholder="Поиск по названию">
+                <ng-template pTemplate="item" let-item>
+                    <div class="flex-row" [style.justify-content]="'space-between'">
+                        <div class="item">
+                            {{ item.label }}
+                        </div>
+
+                        <button
+                                [pTooltip]="'Удалить'"
+                                tooltipPosition="left"
+                                pButton
+                                (click)="delete(item.id)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </ng-template>
+            </p-orderList>
+        </p-tabPanel>
+    </p-tabView>
+</ng-template>

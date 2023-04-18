@@ -1,0 +1,73 @@
+<ng-container *ngIf="(loading$ | async) else content">
+    <p-progressSpinner class="absolute-center"></p-progressSpinner>
+</ng-container>
+
+<ng-template #content>
+    <ng-container *ngIf="(patient$ | async) as patient">
+        <p-card header="Карточка пациента" [style]="{'width': '100%', 'margin-bottom': '2em'}">
+            <div class="flex-row">
+                {{ 'ФИО: ' + (patient | username) }}
+            </div>
+
+            <div class="flex-row">
+                {{ 'Дата рождения: ' + patient.birthDay + " (" + (patient.birthDay | age) + ")" }}
+            </div>
+
+            <div class="flex-row">
+                {{ 'Пол: ' + patient.gender }}
+            </div>
+
+            <div class="flex-row">
+                {{ 'ОМС: ' + patient.oms }}
+            </div>
+
+            <div class="flex-row">
+                {{ 'Телефон: ' + patient.phone }}
+            </div>
+
+            <div class="flex-row">
+                {{ 'Email: ' + patient.email }}
+            </div>
+        </p-card>
+
+        <div class="flex-row" [style.margin-bottom.px]="24">
+            <button
+                    [style.height.px]="51"
+                    [pTooltip]="'Создать новую анкету'"
+                    pButton
+                    (click)="addNewQuestionnaire()">
+                <mat-icon>add_circle_outline</mat-icon>
+            </button>
+        </div>
+
+        <p-orderList
+                filterBy="id"
+                filterPlaceholder="Фильтровать по ID"
+                [listStyle]="{'height':'auto'}"
+                [value]="(questionnaires$ | async) ?? []"
+        >
+            <ng-template pTemplate="item" let-item>
+                <div class="questionnaire-item" (dblclick)="openQuestionnaire(item.id)">
+                    <div class="questionnaire-item-piece">
+                        <span>Анкета</span>
+                        <span [style.margin-left]="'24px'"> {{ item.id }}</span>
+                    </div>
+
+                    <ng-container *ngIf="item.old">
+                        <span [style.color]="'red'">Старая анкета</span>
+                    </ng-container>
+
+                    <div class="questionnaire-item-piece">
+                        <button
+                                tooltipPosition="left"
+                                [pTooltip]="'Редактировать анкету'"
+                                pButton
+                                (click)="editQuestionnaire(item)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </ng-template>
+        </p-orderList>
+    </ng-container>
+</ng-template>

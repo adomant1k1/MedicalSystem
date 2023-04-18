@@ -1,0 +1,90 @@
+<h1 class="page-title">
+    Редактирование анкеты
+</h1>
+
+<ng-container *ngIf="(loading$ | async) else content">
+    <p-progressSpinner class="absolute-center"></p-progressSpinner>
+</ng-container>
+
+<ng-template #content>
+    <div *ngIf="form" class="questionnaire-form" [formGroup]="form">
+        <div class="questionnaire-parameter-item">
+            <ng-container formArrayName="parameters">
+                <ng-container *ngFor="let parameterForm of parameters.controls">
+                    <div class="parameter-form-row" [formGroup]="$any(parameterForm)">
+                        <mat-form-field appearance="fill">
+                            <input matInput
+                                   formControlName="name"
+                                   placeholder="Название параметра">
+                        </mat-form-field>
+
+                        <div class="options-wrapper">
+                            <ng-container formArrayName="options">
+                                <ng-container *ngFor="let optionForm of $any(parameterForm.get('options'))['controls']">
+                                    <div class="option-form" [formGroup]="optionForm">
+                                        <mat-form-field appearance="fill">
+                                            <input matInput
+                                                   formControlName="name"
+                                                   placeholder="Название варианта">
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="fill">
+                                            <input matInput
+                                                   type="number"
+                                                   formControlName="value"
+                                                   placeholder="Баллы варианта">
+                                        </mat-form-field>
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+
+                            <button
+                                    class="add-btn"
+                                    [pTooltip]="'Добавить новый вариант'"
+                                    pButton
+                                    (click)="addNewOption($any(parameterForm))">
+                                <mat-icon>add_circle_outline</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+
+            <button
+                    class="add-btn"
+                    [pTooltip]="'Добавить новый параметр'"
+                    pButton
+                    (click)="addNewParameter()">
+                <mat-icon>add_circle_outline</mat-icon>
+            </button>
+        </div>
+
+        <div class="flex-row">
+            <span class="gap-text">Граница оценки риска</span>
+            <mat-form-field appearance="fill">
+                <input
+                        id="input"
+                        type="number"
+                        matInput
+                        formControlName="estimateBoundary"
+                        placeholder="Введите границу">
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button
+                pButton
+                (click)="saveQuestionnaire()">
+            Сохранить
+        </button>
+
+        <button
+                class="p-button-secondary"
+                [style.margin-left.px]="24"
+                pButton
+                (click)="reset()">
+            Отмена
+        </button>
+    </div>
+</ng-template>

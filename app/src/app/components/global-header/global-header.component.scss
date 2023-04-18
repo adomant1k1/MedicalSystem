@@ -1,0 +1,38 @@
+:host {
+  height: 100%;
+  padding: 0 8px;
+
+  display: flex;
+  align-items: center;
+}
+
+ul {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+}
+
+.right {
+  color: #b3bcc6;
+
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  .menu-button {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: #21272c;
+    text-decoration: none;
+    border: none;
+    background: none;
+
+    &:hover{
+      opacity: .8;
+      cursor: pointer;
+    }
+  }
+}

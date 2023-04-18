@@ -1,0 +1,67 @@
+<nav
+        class="navbar"
+        [attr.opened]="isOpened"
+>
+    <div
+            class="logo-container"
+            (click)="clickItem('1')"
+    >
+        <img
+                *ngIf="!isOpened"
+                [@slideInOut]
+                width="45px"
+                height="45px"
+                [src]="'icons/nav/logo.png' | static"
+                alt="Логотип"
+                routerLink="/"
+        />
+        <img
+                *ngIf="isOpened"
+                [@slideInOut]
+                [src]="'icons/nav/another-logo.jpg' | static"
+                alt="Логотип"
+                routerLink="/"
+        />
+    </div>
+
+    <ul>
+        <ng-container *ngFor="let section of navSections; last as isLastSection">
+            <ng-container *ngIf="section.visible">
+                <ng-container *ngFor="let item of section.items; last as isLastItem">
+                    <a
+                            [href]="item.route"
+                            [routerLink]="item.route"
+                    >
+                        <li
+                                *ngIf="item.visible"
+                                (click)="clickItem(item.id)"
+                                [ngClass]="{ active: activeNavIndex === item.id }"
+                                [pTooltip]="item.title"
+                                [tooltipDisabled]="isOpened"
+                                tooltipStyleClass="tooltip"
+                        >
+                            <app-icon [src]="'icons/nav/' + item.icon + '.svg'"></app-icon>
+                            <span
+                                    *ngIf="isOpened;"
+                                    class="title"
+                                    [@slideInOut]
+                            >
+                {{ item.title }}
+              </span>
+                        </li>
+                    </a>
+                </ng-container>
+                <div
+                        *ngIf="!isLastSection"
+                        class="separator"
+                ></div>
+            </ng-container>
+        </ng-container>
+    </ul>
+    <div class="button">
+        <div
+                class="chevron"
+                (click)="statusChange()"
+        ></div>
+    </div>
+</nav>

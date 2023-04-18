@@ -1,0 +1,30 @@
+:host {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+
+  aside {
+    min-height: 100vh;
+    background: #00325e;
+  }
+
+  .main-content {
+    min-height: 100vh;
+    padding: 12px 24px;
+    overflow-x: hidden;
+    width: 100% !important;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px
+  }
+
+  header {
+    height: 42px;
+  }
+
+  main {
+    height: 100%;
+  }
+}

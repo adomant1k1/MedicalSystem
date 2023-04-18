@@ -1,0 +1,26 @@
+<div class="title" mat-dialog-title>
+    <h2>
+        {{ entity === 'jobPlace' ? 'Ввод данных организации' : 'Ввод данных должности' }}
+    </h2>
+    <mat-icon class="cursor-pointer" (click)="close()">close</mat-icon>
+</div>
+
+
+<mat-dialog-content [formGroup]="form">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Название</mat-label>
+                    <input matInput
+                           formControlName="firstname">
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+
+
+<mat-dialog-actions>
+    <button class="mat-raised-button mat-primary" (click)="save()">Сохранить</button>
+</mat-dialog-actions>

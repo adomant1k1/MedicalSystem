@@ -1,0 +1,101 @@
+<div class="title" mat-dialog-title>
+    <h2>
+        {{ action === 'add' ? 'Ввод данных пациента' : 'Изменение данных пациента' }}
+    </h2>
+    <mat-icon class="cursor-pointer" (click)="close()">close</mat-icon>
+</div>
+
+<mat-dialog-content [formGroup]="form">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Имя</mat-label>
+                    <input matInput
+                           formControlName="firstname">
+                </mat-form-field>
+            </div>
+
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Фамилия</mat-label>
+                    <input matInput
+                           formControlName="lastname">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Отчество</mat-label>
+                    <input matInput
+                           formControlName="middlename">
+                </mat-form-field>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="date">
+                    <mat-label>Дата рождения</mat-label>
+                    <input
+                            matInput
+                            [matDatepicker]="picker"
+                            formControlName="birthdate"
+                    >
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Пол</mat-label>
+                    <mat-select formControlName="gender">
+                        <mat-option *ngFor="let gender of genders" [value]="gender.value">
+                            {{ gender.label }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>ОМС</mat-label>
+                    <input matInput
+                           [maxLength]="16"
+                           formControlName="oms">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Телефон</mat-label>
+                    <input matInput
+                           [pattern]="phoneRegex"
+                           formControlName="phone">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input matInput
+                           formControlName="phone">
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button mat-primary" (click)="save()">Сохранить</button>
+</mat-dialog-actions>

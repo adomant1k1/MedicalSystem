@@ -1,0 +1,33 @@
+.patient-item {
+  padding: 16px;
+  display: inline-flex;
+  width: 100%;
+}
+
+.patient-item-piece {
+  padding: 0 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.add-btn {
+  height: 40px;
+  position: absolute;
+  right: 100px;
+  top: 74px;
+}
+
+:host {
+  ::ng-deep {
+    li.p-orderlist-item {
+      padding: 0 !important;
+    }
+  }
+
+  ::ng-deep {
+    .p-orderlist-controls {
+      display: none !important;
+    }
+  }
+}

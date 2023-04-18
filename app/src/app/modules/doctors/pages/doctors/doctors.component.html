@@ -1,0 +1,42 @@
+<h1 class="page-title">
+    Врачи
+</h1>
+
+<ng-container *ngIf="(loading$ | async) else content">
+    <p-progressSpinner class="absolute-center"></p-progressSpinner>
+</ng-container>
+
+<ng-template #content>
+        <button
+                class="add-btn"
+                tooltipPosition="left"
+                [pTooltip]="'Добавить нового врача'"
+                [style.margin-left.px]="24"
+                pButton
+                (click)="addNewDoctor()">
+            <mat-icon>add_circle_outline</mat-icon>
+        </button>
+
+    <p-orderList
+            [value]="(doctors$ | async) ?? []"
+            [listStyle]="{'height':'auto'}"
+            header="Cписок врачей"
+            filterBy="lastname"
+            filterPlaceholder="Поиск по фамилии">
+        <ng-template pTemplate="item" let-item>
+            <div class="doctor-item" (dblclick)="openDoctorCard(item.id)">
+                <div class="doctor-item-piece">
+                    {{ item.firstname }} {{ item.lastname }}
+                </div>
+
+                <div class="doctor-item-piece">
+                    {{ item.jobPlace }}
+                </div>
+
+                <div class="doctor-item-piece">
+                    {{ item.jobTitle }}
+                </div>
+            </div>
+        </ng-template>
+    </p-orderList>
+</ng-template>

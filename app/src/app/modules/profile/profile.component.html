@@ -1,0 +1,38 @@
+<ng-container *ngIf="(profile$ | async) as profile">
+    <p-card header="Личные данные" [style]="{'width': '100%', 'margin-bottom': '2em'}">
+        <div class="flex-row">
+            {{ 'ФИО: ' + (profile | username) }}
+        </div>
+
+        <div *ngIf="profile.birthDay" class="flex-row">
+            {{ 'Дата рождения: ' + profile.birthDay }}
+        </div>
+
+        <div *ngIf="profile.gender" class="flex-row">
+            {{ 'Пол: ' + profile.gender }}
+        </div>
+
+        <div *ngIf="profile.oms" class="flex-row">
+            {{ 'ОМС: ' + profile.oms }}
+        </div>
+
+        <div *ngIf="profile.phone" class="flex-row">
+            {{ 'Телефон: ' + profile.phone }}
+        </div>
+
+        <div *ngIf="profile.jobPlace" class="flex-row">
+            {{ 'Место работы: ' + profile.jobPlace }}
+        </div>
+
+        <div *ngIf="profile.jobTitle" class="flex-row">
+            {{ 'Должность: ' + profile.jobTitle }}
+        </div>
+
+        <button
+            pButton
+            (click)="changePassword()">
+           Изменить пароль
+        </button>
+    </p-card>
+</ng-container>
+

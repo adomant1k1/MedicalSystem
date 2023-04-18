@@ -1,0 +1,32 @@
+:host {
+  ::ng-deep .p-message-wrapper {
+    display: block;
+  }
+
+  .messages {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    top: 5%;
+    justify-content: center;
+    z-index: 10000;
+  }
+
+  .messages-wrapper {
+    display: grid;
+    max-width: 80%;
+    position: fixed;
+    left: 10%;
+    top: 2em;
+    z-index: 100000000;
+
+    &__content {
+      grid-template-columns: 1fr auto;
+      display: grid;
+
+      pre {
+        white-space: pre-wrap;
+      }
+    }
+  }
+}

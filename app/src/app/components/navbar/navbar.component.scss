@@ -1,0 +1,177 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  width: 72px;
+  transition: width 0.2s ease-out;
+  height: 100vh;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0;
+  text-align: left;
+  padding-right: 4px;
+
+  .logo-container {
+    margin: 16px auto 0 auto;
+    min-height: 26px;
+    display: flex;
+    cursor: pointer;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    width: 100%;
+    margin-top: 70px;
+    margin-bottom: 40px;
+    overflow-y: overlay;
+    overflow-x: visible;
+    scrollbar-width: 0;
+
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+
+    &:hover {
+      &::-webkit-scrollbar {
+        width: 4px
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: #596774;
+        border-radius: 16px
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 16px;
+        border: 6px solid #f6f8f9;
+      }
+    }
+  }
+
+  .button {
+    height: 44px;
+    margin-top: auto;
+  }
+
+  .chevron {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    background-image: url(/assets/icons/nav/new-chevron_menu.svg);
+    margin: 0 24px 24px auto;
+    opacity: 0.25;
+
+    &:hover {
+      opacity: unset;
+    }
+  }
+}
+
+.navbar[opened="true"] {
+  width: 230px;
+
+  ul {
+    align-items: unset;
+  }
+
+  .logo-container {
+    margin-left: 24px;
+    justify-content: flex-start;
+  }
+
+  .chevron {
+    transform: scaleX(-1);
+  }
+
+  li {
+    justify-content: flex-start;
+    padding-left: 26px;
+  }
+}
+
+li {
+  display: flex;
+  position: relative;
+  align-items: center;
+  cursor: pointer;
+  margin: 0 8px 10px 8px;
+  height: 40px;
+  opacity: 0.6;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 4px;
+
+  &::ng-deep {
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &:hover {
+    padding: 8px 14px;
+    background: #004582;
+    border-radius: 4px;
+    opacity: unset;
+  }
+
+  &.active {
+    background: #0075db;
+    opacity: unset;
+  }
+}
+
+.title {
+  color: #ffffff;
+  margin-left: 12px;
+}
+
+::ng-deep .tooltip {
+  .p-tooltip-text {
+    background-color: #21272c;
+    font-size: 14px !important;
+  }
+
+  color: var(--common-white);
+  background-color: #21272c;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0.9;
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 0.5rem solid transparent;
+    border-right: 0.5rem solid transparent;
+    border-bottom: 0.5rem solid #21272c;
+  }
+
+  &.tooltip {
+    overflow: initial;
+    margin-left: 1.5rem;
+
+    &:after {
+      left: -0.65rem;
+      top: calc(50% - 0.25rem);
+      transform: rotate(270deg);
+    }
+  }
+}
+
+.separator {
+  width: calc(100% - 16px);
+  height: 1px;
+  background: #ffffff;
+  opacity: 0.2;
+  padding: calc(1px * 0.5);
+  margin: 8px auto;
+}
