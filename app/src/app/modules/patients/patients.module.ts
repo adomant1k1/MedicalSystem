@@ -17,11 +17,24 @@ import { MatSelectModule } from "@angular/material/select";
 
 import { PatientsRoutingModule } from "./patients-routing.module";
 import { UsernamePipe } from "../../pipes";
-import { NewPatientDialogComponent, PatientCardComponent, PatientsComponent, CreateQuestionnaireDialogComponent } from "./pages";
+import {
+    NewPatientDialogComponent,
+    PatientCardComponent,
+    PatientsComponent,
+    EditPatientDialogComponent
+} from "./pages";
 import { AgePipe } from "../../pipes/age.pipe";
+import {
+    CreateQuestionnaireDialogModule
+} from "../../shared/create-questionnaire-dialog/create-questionnaire-dialog.module";
 
 @NgModule({
-    declarations: [PatientsComponent, PatientCardComponent, NewPatientDialogComponent, CreateQuestionnaireDialogComponent],
+    declarations: [
+        PatientsComponent,
+        PatientCardComponent,
+        NewPatientDialogComponent,
+        EditPatientDialogComponent
+    ],
     imports: [
         CommonModule,
         PatientsRoutingModule,
@@ -41,7 +54,8 @@ import { AgePipe } from "../../pipes/age.pipe";
         MatDatepickerModule,
         MatNativeDateModule,
         MatSelectModule,
-        AgePipe
+        AgePipe,
+        CreateQuestionnaireDialogModule
     ],
     providers: [AgePipe]
 })

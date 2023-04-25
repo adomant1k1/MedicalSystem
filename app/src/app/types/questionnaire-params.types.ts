@@ -1,13 +1,14 @@
 export type QuestionnaireParamsType = {
     title: string;
     value: string;
-    points: number;
 }
+
+export type QuestionnaireOption = {
+    name: string;
+    value: number;
+};
 
 export type QuestionnaireParams = {
     name: string;
-    options: {
-        name: string;
-        value: number;
-    }[];
+    options: QuestionnaireOption[];
 }

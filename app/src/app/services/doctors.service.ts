@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 
-import { DoctorType } from "../../../../../types";
-import { Doctors } from "../../../config";
+import { Doctors } from "../config";
+import { DoctorType } from "../types";
 
 @Injectable()
 export class DoctorsService {
@@ -20,7 +20,8 @@ export class DoctorsService {
         this._loading$.next(false);
     }
 
-    public getDoctorById(id: number | string): DoctorType | null {
-        return this._doctors$.value.find(it => it.id === id) ?? null;
+    public getDoctorById(id: number): DoctorType | null {
+        const val = this._doctors$.value && this._doctors$.value.length > 0 ? this._doctors$.value : Doctors;
+        return val.find(it => it.id === id) ?? null;
     }
 }

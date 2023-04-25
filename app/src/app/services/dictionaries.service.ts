@@ -35,13 +35,13 @@ export class DictionariesService {
 
     public loadJobTitles(): void {
         this._jobTitlesLoading$.next(true);
-        this._jobTitles$.next(JobTitles);
+        this._jobTitles$.next(JobTitles.map(it => ({ id: it.id, label: it.jobTitle })));
         this._jobTitlesLoading$.next(false);
     }
 
     public loadJobPlaces(): void {
         this._jobPlacesLoading$.next(true);
-        this._jobPlaces$.next(JobPlaces);
+        this._jobPlaces$.next(JobPlaces.map(it => ({ id: it.id, label: it.jobPlace })));
         this._jobPlacesLoading$.next(false);
     }
 }

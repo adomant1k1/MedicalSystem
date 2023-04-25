@@ -1,6 +1,6 @@
 <div class="title" mat-dialog-title>
     <h2>
-        {{ action === 'add' ? 'Ввод данных врача' : 'Изменение данных врача' }}
+        {{ 'Ввод данных врача' }}
     </h2>
     <mat-icon class="cursor-pointer" (click)="close()">close</mat-icon>
 </div>
@@ -17,7 +17,7 @@
                     <mat-form-field>
                         <mat-label>Имя</mat-label>
                         <input matInput
-                               formControlName="firstname">
+                               formControlName="firstName">
                     </mat-form-field>
                 </div>
 
@@ -25,7 +25,7 @@
                     <mat-form-field>
                         <mat-label>Фамилия</mat-label>
                         <input matInput
-                               formControlName="lastname">
+                               formControlName="lastName">
                     </mat-form-field>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                     <mat-form-field>
                         <mat-label>Отчество</mat-label>
                         <input matInput
-                               formControlName="middlename">
+                               formControlName="middleName">
                     </mat-form-field>
                 </div>
             </div>

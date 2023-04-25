@@ -1,9 +1,9 @@
 export type PatientType = {
-    id: string | number;
-    firstname: string;
-    lastname: string;
-    middlename: string;
-    birthDay: string;
+    id: number;
+    firstName: string;
+    lastName: string;
+    middleName: string;
+    birthDate: string;
     gender: string;
     oms: string;
     phone: string;

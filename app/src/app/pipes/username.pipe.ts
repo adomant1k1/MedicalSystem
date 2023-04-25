@@ -19,17 +19,17 @@ export class UsernamePipe implements PipeTransform {
         let username = '';
 
         if (format === 'short') {
-            username += profile.lastname ?? '';
-            username += profile.firstname ? ` ${profile.firstname.slice(0, 1)}.` : '';
-            username += profile.middlename
-                ? ` ${profile.middlename.slice(0, 1)}.`
+            username += profile.lastName ?? '';
+            username += profile.firstName ? ` ${profile.firstName.slice(0, 1)}.` : '';
+            username += profile.middleName
+                ? ` ${profile.middleName.slice(0, 1)}.`
                 : '';
         }
 
         if (format === 'full') {
-            username += profile.lastname ?? '';
-            username += profile.firstname ? ' ' + profile.firstname : '';
-            username += profile.middlename ? ' ' + profile.middlename : '';
+            username += profile.lastName ?? '';
+            username += profile.firstName ? ' ' + profile.firstName : '';
+            username += profile.middleName ? ' ' + profile.middleName : '';
         }
 
         return username;

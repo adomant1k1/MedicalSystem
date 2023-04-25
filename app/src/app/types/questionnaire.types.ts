@@ -1,16 +1,14 @@
-import { PatientType } from "./patient.types";
-import { DoctorType } from "./doctor.types";
 import { QuestionnaireParams, QuestionnaireParamsType } from "./questionnaire-params.types";
 
 export type QuestionnaireType = {
     id: number;
     date: string;
-    patient: PatientType;
-    doctor: DoctorType;
+    patientId: number;
+    doctorId: number;
     parameters: QuestionnaireParamsType[];
     points: number;
     result: string;
-    old: boolean;
+    valid: boolean;
 }
 
 export type QuestionnaireParamsWithEstimateBoundary = {

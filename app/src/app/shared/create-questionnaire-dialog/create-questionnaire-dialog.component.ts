@@ -3,7 +3,7 @@ import { FormBuilder, UntypedFormArray, UntypedFormControl, UntypedFormGroup } f
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { filter, Subject, takeUntil } from "rxjs";
 
-import { QuestionnaireService } from "../../../../services";
+import { QuestionnaireService } from "../../services";
 
 @Component({
     selector: 'app-create-questionnaire-dialog',

@@ -1,0 +1,35 @@
+<ng-container *ngIf="(loading$ | async) else content">
+    <p-progressSpinner class="absolute-center"></p-progressSpinner>
+</ng-container>
+
+<ng-template #content>
+    <p-orderList
+            filterBy="id"
+            filterPlaceholder="Фильтровать по ID"
+            [listStyle]="{'height':'auto'}"
+            [value]="(questionnaires$ | async) ?? []"
+    >
+        <ng-template pTemplate="item" let-item>
+            <div class="questionnaire-item" (dblclick)="openQuestionnaire(item.id)">
+                <div class="questionnaire-item-piece">
+                    <span>Анкета</span>
+                    <span [style.margin-left]="'24px'"> {{ item.id }}</span>
+                </div>
+
+                <ng-container *ngIf="!item.valid">
+                    <span [style.color]="'red'">Старая анкета</span>
+                </ng-container>
+
+                <div class="questionnaire-item-piece">
+                    <button
+                            tooltipPosition="left"
+                            [pTooltip]="'Редактировать анкету'"
+                            pButton
+                            (click)="editQuestionnaire(item)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </ng-template>
+    </p-orderList>
+</ng-template>

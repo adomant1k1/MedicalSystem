@@ -100,4 +100,12 @@ export class QuestionnaireComponent implements OnInit, OnDestroy {
         this.buildForm(this._questionnaire as any);
         this.notification.showErrorMessage('ne kek');
     }
+
+    public deleteVariant(form: UntypedFormGroup, index: number): void {
+       (form.controls['options'] as UntypedFormArray).removeAt(index);
+    }
+
+    public deleteParameter(index: number): void {
+        (this.form.get('parameters') as UntypedFormArray).removeAt(index);
+    }
 }

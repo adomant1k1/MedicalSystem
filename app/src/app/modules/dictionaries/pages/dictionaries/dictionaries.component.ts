@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 
 import { DictionariesService } from "../../../../services";
-import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
-import {AddDictionaryItemComponent} from "../add-dictionary-item/add-dictionary-item.component";
+import { AddDictionaryItemComponent } from "../add-dictionary-item";
+import { EditDictionaryItemComponent } from "../edit-dictionary-item";
 
 @Component({
     selector: 'app-dictionaries',
@@ -29,8 +30,16 @@ export class DictionariesComponent implements OnInit {
         this.service.loadData();
     }
 
-    public delete(item: any): void {
-
+    public edit(item: any): void {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.width = '600px';
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.data = {
+            entity: this.tabIndex === 0 ? 'jobTitle' : 'jobPlace',
+            value: item
+        };
+        const modalRef = this.dialog.open(EditDictionaryItemComponent, dialogConfig);
     }
 
     public addNew(): void {

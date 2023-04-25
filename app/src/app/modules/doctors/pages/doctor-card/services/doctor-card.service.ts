@@ -1,8 +1,8 @@
 import { Injectable} from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 
+import { Doctors } from "../../../../../config";
 import { DoctorType } from "../../../../../types";
-import { Doctors } from "../../../config";
 
 @Injectable()
 export class DoctorCardService {

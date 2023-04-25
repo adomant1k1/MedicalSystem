@@ -24,6 +24,16 @@
             <div class="flex-row">
                 {{ 'Email: ' + doctor.email }}
             </div>
+
+            <div class="flex-row" [style.margin-top.px]="24">
+                <button
+                        [style.height.px]="51"
+                        [pTooltip]="'Редактировать'"
+                        pButton
+                        (click)="editDoctor(doctor)">
+                    Редактировать
+                </button>
+            </div>
         </p-card>
     </ng-container>
 </ng-template>

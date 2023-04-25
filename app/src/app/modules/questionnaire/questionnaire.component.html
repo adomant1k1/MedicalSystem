@@ -10,7 +10,7 @@
     <div *ngIf="form" class="questionnaire-form" [formGroup]="form">
         <div class="questionnaire-parameter-item">
             <ng-container formArrayName="parameters">
-                <ng-container *ngFor="let parameterForm of parameters.controls">
+                <ng-container *ngFor="let parameterForm of parameters.controls; let idx = index;">
                     <div class="parameter-form-row" [formGroup]="$any(parameterForm)">
                         <mat-form-field appearance="fill">
                             <input matInput
@@ -20,7 +20,7 @@
 
                         <div class="options-wrapper">
                             <ng-container formArrayName="options">
-                                <ng-container *ngFor="let optionForm of $any(parameterForm.get('options'))['controls']">
+                                <ng-container *ngFor="let optionForm of $any(parameterForm.get('options'))['controls']; let i = index">
                                     <div class="option-form" [formGroup]="optionForm">
                                         <mat-form-field appearance="fill">
                                             <input matInput
@@ -34,6 +34,14 @@
                                                    formControlName="value"
                                                    placeholder="Баллы варианта">
                                         </mat-form-field>
+
+                                        <button
+                                                class="delete-btn"
+                                                [pTooltip]="'Удалить вариант'"
+                                                pButton
+                                                (click)="deleteVariant($any(parameterForm), i)">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
                                     </div>
                                 </ng-container>
                             </ng-container>
@@ -47,6 +55,14 @@
                             </button>
                         </div>
                     </div>
+
+                    <button
+                            class="delete-btn parameter"
+                            [pTooltip]="'Удалить параметр'"
+                            pButton
+                            (click)="deleteParameter(idx)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
                 </ng-container>
             </ng-container>
 

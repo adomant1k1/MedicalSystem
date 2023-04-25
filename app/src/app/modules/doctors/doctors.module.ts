@@ -14,10 +14,15 @@ import { MatInputModule} from "@angular/material/input";
 
 import { DoctorsRoutingModule } from "./doctors-routing.module";
 import { UsernamePipe } from "../../pipes";
-import { DoctorCardComponent, DoctorsComponent, NewDoctorDialogComponent } from "./pages";
+import { DoctorCardComponent, DoctorsComponent, EditDoctorDialogComponent, NewDoctorDialogComponent } from "./pages";
 
 @NgModule({
-    declarations: [DoctorsComponent, DoctorCardComponent, NewDoctorDialogComponent],
+    declarations: [
+        DoctorsComponent,
+        DoctorCardComponent,
+        NewDoctorDialogComponent,
+        EditDoctorDialogComponent
+    ],
     imports: [
         CommonModule,
         DoctorsRoutingModule,
@@ -34,7 +39,6 @@ import { DoctorCardComponent, DoctorsComponent, NewDoctorDialogComponent } from 
         ReactiveFormsModule,
         MatInputModule
     ],
-    exports: [DoctorsComponent],
-    bootstrap: [DoctorsComponent]
+    exports: [DoctorsComponent]
 })
 export class DoctorsModule {}

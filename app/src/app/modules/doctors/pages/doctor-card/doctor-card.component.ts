@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 
 import { DoctorCardService } from "./services";
+import {EditDoctorDialogComponent} from "../edit-doctor-dialog";
 
 @Component({
     selector: 'app-doctor-card',
@@ -16,6 +18,7 @@ export class DoctorCardComponent implements OnInit {
     public readonly doctor$ = this.service.doctor$;
 
     constructor(
+        public readonly dialog: MatDialog,
         private readonly router: Router,
         private readonly route: ActivatedRoute,
         public readonly service: DoctorCardService
@@ -25,5 +28,16 @@ export class DoctorCardComponent implements OnInit {
         this.route.params.subscribe(it => {
             this.service.loadDoctor(it['id']);
         })
+    }
+
+    public editDoctor(doctor: any): void {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.width = '600px';
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.data = {
+            value: doctor
+        };
+        const modalRef = this.dialog.open(EditDoctorDialogComponent, dialogConfig);
     }
 }

@@ -26,10 +26,10 @@
         <ng-template pTemplate="item" let-item>
             <div class="patient-item" (dblclick)="openPatientCard(item.id)">
                 <div class="patient-item-piece">
-                    {{ item.firstname }} {{ item.lastname }}
+                    {{ item.firstName }} {{ item.lastName }} {{ item.middleName }}
                 </div>
                 <div class="patient-item-piece">
-                    {{ item.birthDay }}
+                    {{ item.birthDate  + ' (' + (item.birthDate | age) + ')' }}
                 </div>
             </div>
         </ng-template>

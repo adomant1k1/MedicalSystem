@@ -1,0 +1,15 @@
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.col {
+  padding-left: 0 !important;
+}

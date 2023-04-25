@@ -4,85 +4,89 @@
 
 <ng-template #content>
     <ng-container *ngIf="(questionnaire$ | async) as questionnaire">
-        <p-card header="Карточка пациента" [style]="{'width': '100%', 'margin-bottom': '2em'}">
-            <div class="flex-row">
-                {{ 'ФИО: ' + (questionnaire.patient | username) }}
-            </div>
-
-            <div class="flex-row">
-                {{ 'Дата рождения: ' + questionnaire.patient.birthDay + " (" + (questionnaire.patient.birthDay | age) + ")" }}
-            </div>
-
-            <div class="flex-row">
-                {{ 'Пол: ' + questionnaire.patient.gender }}
-            </div>
-
-            <div class="flex-row">
-                {{ 'ОМС: ' + questionnaire.patient.oms }}
-            </div>
-
-            <div class="flex-row">
-                {{ 'Телефон: ' + questionnaire.patient.phone }}
-            </div>
-
-            <div class="flex-row">
-                {{ 'Email: ' + questionnaire.patient.email }}
-            </div>
-        </p-card>
-
-        <div class="flex-row flex-end" [style.margin-bottom.px]="24">
-            <button
-
-                    [pTooltip]="'Распечатать анкету'"
-                    tooltipPosition="left"
-                    [style.margin-left.px]="24"
-                    pButton
-                    (click)="print()">
-                <mat-icon>print</mat-icon>
-            </button>
-
-            <button
-                    [pTooltip]="'Скачать анкету'"
-                    tooltipPosition="left"
-                    [style.margin-left.px]="24"
-                    pButton
-                    (click)="download()">
-                <mat-icon>cloud_download</mat-icon>
-            </button>
-        </div>
-
-        <p-card [style]="{'width': '100%', 'margin-bottom': '2em'}" id="exportData">
-            <div class="flex-row" [style.margin-bottom.px]="12">
-              <div [style.width]="'100%'" [style.text-align]="'center'">
-                  <span [style.margin-right.px]="6">Анкета</span>
-              </div>
-            </div>
-
-            <div class="flex-row" [style.margin-bottom.px]="12">
-                <div [style.width]="'100%'" [style.text-align]="'center'">
-                    <span [style.margin-right.px]="6">Дата создания: </span>
-                    <span>{{ questionnaire.date }}</span>
+        <ng-container *ngIf="(patient$ | async) as patient">
+            <p-card header="Карточка пациента" [style]="{'width': '100%', 'margin-bottom': '2em'}">
+                <div class="flex-row">
+                    {{ 'ФИО: ' + (patient | username) }}
                 </div>
+
+                <div class="flex-row">
+                    {{ 'Дата рождения: ' + patient.birthDate + " (" + (patient.birthDate | age) + ")" }}
+                </div>
+
+                <div class="flex-row">
+                    {{ 'Пол: ' + patient.gender }}
+                </div>
+
+                <div class="flex-row">
+                    {{ 'ОМС: ' + patient.oms }}
+                </div>
+
+                <div class="flex-row">
+                    {{ 'Телефон: ' + patient.phone }}
+                </div>
+
+                <div class="flex-row">
+                    {{ 'Email: ' + patient.email }}
+                </div>
+            </p-card>
+
+            <div class="flex-row flex-end" [style.margin-bottom.px]="24">
+                <button
+
+                        [pTooltip]="'Распечатать анкету'"
+                        tooltipPosition="left"
+                        [style.margin-left.px]="24"
+                        pButton
+                        (click)="print()">
+                    <mat-icon>print</mat-icon>
+                </button>
+
+                <button
+                        [pTooltip]="'Скачать анкету'"
+                        tooltipPosition="left"
+                        [style.margin-left.px]="24"
+                        pButton
+                        (click)="download()">
+                    <mat-icon>cloud_download</mat-icon>
+                </button>
             </div>
 
-            <div class="flex-row" [style.margin-bottom.px]="12">
-                <span>{{ questionnaire.result }}</span>
-            </div>
+            <p-card [style]="{'width': '100%', 'margin-bottom': '2em'}" id="exportData">
+                <div class="flex-row" [style.margin-bottom.px]="12">
+                    <div [style.width]="'100%'" [style.text-align]="'center'">
+                        <span [style.margin-right.px]="6">Анкета</span>
+                    </div>
+                </div>
 
-            <div class="flex-row" [style.margin-bottom.px]="24">
-                <span [style.margin-right.px]="6" [style.font-size.px]="14">Балл:</span>
-                <span>{{ questionnaire.points }}</span>
-            </div>
+                <div class="flex-row" [style.margin-bottom.px]="12">
+                    <div [style.width]="'100%'" [style.text-align]="'center'">
+                        <span [style.margin-right.px]="6">Дата создания: </span>
+                        <span>{{ questionnaire.date }}</span>
+                    </div>
+                </div>
 
-            <div *ngFor="let parameter of questionnaire.parameters" class="flex-row" [style.margin-bottom.px]="12">
-                <span [style.margin-right.px]="6" [style.font-size.px]="14">{{ parameter.title }}:</span>
-                <span>{{ parameter.value }}</span>
-            </div>
+                <div class="flex-row" [style.margin-bottom.px]="12">
+                    <span>{{ questionnaire.result }}</span>
+                </div>
 
-            <div class="flex-row" [style.margin-top.px]="24">
-                <span [style.font-size.px]="14" [style.margin-right.px]="6">Врач:</span>
-                <span>{{ questionnaire.doctor | username }}</span>
-            </div>
-        </p-card>
+                <div class="flex-row" [style.margin-bottom.px]="24">
+                    <span [style.margin-right.px]="6" [style.font-size.px]="14">Балл:</span>
+                    <span>{{ questionnaire.points }}</span>
+                </div>
+
+                <div *ngFor="let parameter of questionnaire.parameters" class="flex-row" [style.margin-bottom.px]="12">
+                    <span [style.margin-right.px]="6" [style.font-size.px]="14">{{ parameter.title }}:</span>
+                    <span>{{ parameter.value }}</span>
+                </div>
+
+                <ng-container *ngIf="(doctor$ | async) as doctor">
+                    <div class="flex-row" [style.margin-top.px]="24">
+                        <span [style.font-size.px]="14" [style.margin-right.px]="6">Врач:</span>
+                        <span>{{ doctor | username }}</span>
+                    </div>
+                </ng-container>
+            </p-card>
+        </ng-container>
     </ng-container>
 </ng-template>

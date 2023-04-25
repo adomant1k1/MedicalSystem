@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 
-import { PatientsService } from "./services";
 import { NewPatientDialogComponent } from "../new-patient-dialog";
+import { PatientsService } from "../../../../services";
 
 @Component({
     selector: 'app-patients',

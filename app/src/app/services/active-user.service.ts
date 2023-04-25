@@ -5,17 +5,17 @@ import { RolesTypes } from "../types";
 
 const AdminUser = {
     role: RolesTypes.Admin,
-    lastname: 'Петров',
+    lastName: 'Петров',
     middleName: 'Петя',
-    firstname: 'Петечкин',
+    firstName: 'Петечкин',
     phone: '+79123123123'
 };
 
 const PatientUser = {
     role: RolesTypes.Patient,
-    lastname: 'Петров',
+    lastName: 'Петров',
     middleName: 'Петя',
-    firstname: 'Петечкин',
+    firstName: 'Петечкин',
     birthDay: '02-06-1959',
     oms: '1231241124124124124',
     phone: '+79123123123'
@@ -23,9 +23,9 @@ const PatientUser = {
 
 const DoctorUser = {
     role: RolesTypes.Doctor,
-    lastname: 'Петров',
+    lastName: 'Петров',
     middleName: 'Петя',
-    firstname: 'Петечкин',
+    firstName: 'Петечкин',
     phone: '+79123123123',
     jobPlace: 'Больница 1',
     jobTitle: 'Врач'

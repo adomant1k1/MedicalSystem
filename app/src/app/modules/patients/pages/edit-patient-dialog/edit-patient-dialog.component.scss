@@ -1,0 +1,29 @@
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.col {
+  padding-left: 0 !important;
+}
+
+::ng-deep {
+  .date {
+    .mat-icon-button {
+      line-height: 14px !important;
+      height: 20px !important;
+    }
+
+    .mat-form-field-infix {
+      height: 46px;
+      display: inherit !important;
+    }
+  }
+}

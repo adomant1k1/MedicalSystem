@@ -1,8 +1,8 @@
 export type DoctorType = {
-    id: number | string;
-    firstname: string;
-    lastname: string;
-    middlename: string;
+    id: number;
+    firstName: string;
+    lastName: string;
+    middleName: string;
     jobTitle: string;
     jobPlace: string;
     phone: string;

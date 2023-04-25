@@ -9,12 +9,15 @@ import { CardModule } from "primeng/card";
 import { TooltipModule } from "primeng/tooltip";
 import { ButtonModule } from "primeng/button";
 import { ProgressSpinnerModule } from "primeng/progressspinner";
+import { OrderListModule } from "primeng/orderlist";
 
 import { QuestionnairesRoutingModule } from "./questionnaires-routing.module";
 import { UsernamePipe} from "../../pipes";
 import { QuestionnaireCardComponent, QuestionnairesComponent } from "./pages";
 import {AgePipe} from "../../pipes/age.pipe";
-
+import {
+    CreateQuestionnaireDialogModule
+} from "../../shared/create-questionnaire-dialog/create-questionnaire-dialog.module";
 
 @NgModule({
     declarations: [QuestionnairesComponent, QuestionnaireCardComponent],
@@ -31,7 +34,9 @@ import {AgePipe} from "../../pipes/age.pipe";
         MatSelectModule,
         ReactiveFormsModule,
         MatDialogModule,
-        AgePipe
+        AgePipe,
+        OrderListModule,
+        CreateQuestionnaireDialogModule
     ]
 })
 export class QuestionnairesModule {}

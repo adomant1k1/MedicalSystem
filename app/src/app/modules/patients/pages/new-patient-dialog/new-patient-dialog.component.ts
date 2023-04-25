@@ -12,8 +12,6 @@ import { RUS_PHONE_REGEX } from "../../../../utils";
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewPatientDialogComponent implements OnInit {
-    public action!: 'add' | 'edit';
-
     public value: any | null;
 
     public form!: UntypedFormGroup;
@@ -27,7 +25,6 @@ export class NewPatientDialogComponent implements OnInit {
         private dialogRef: MatDialogRef<NewPatientDialogComponent>,
         private readonly fb: FormBuilder
     ) {
-        this.action = this.data['action'] ?? 'add';
         this.value = this.data['value'] ?? null;
     }
 
@@ -40,13 +37,14 @@ export class NewPatientDialogComponent implements OnInit {
 
         this.form = this.fb.group(
             {
-                firstname: new UntypedFormControl({ value: value?.firstname ?? null, disabled: false }),
-                lastname: new UntypedFormControl({ value: value?.lastname ?? null, disabled: false }),
-                middlename: new UntypedFormControl({ value: value?.middlename ?? null, disabled: false }),
-                birthdate: new UntypedFormControl({ value: value?.birthdate ?? null, disabled: false }),
+                firstName: new UntypedFormControl({ value: value?.firstName ?? null, disabled: false }),
+                lastName: new UntypedFormControl({ value: value?.lastName ?? null, disabled: false }),
+                middleName: new UntypedFormControl({ value: value?.middleName ?? null, disabled: false }),
+                birthDate: new UntypedFormControl({ value: value?.birthDate ? new Date(value.birthDate) : null, disabled: false }),
                 oms: new UntypedFormControl({ value: value?.oms ?? null, disabled: false }),
                 gender: new UntypedFormControl({ value: value?.gender ?? null, disabled: false }),
                 phone: new UntypedFormControl({ value: value?.phone ?? null, disabled: false }),
+                email: new UntypedFormControl({ value: value?.email ?? null, disabled: false }),
             }
         );
     }

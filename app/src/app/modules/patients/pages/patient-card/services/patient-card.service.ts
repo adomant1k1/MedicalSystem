@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 
+import { Patients, Questionnaires } from "../../../../../config";
 import { PatientType, QuestionnaireType } from "../../../../../types";
-import { Patients, Questionnaires} from "../../../config";
 
 @Injectable()
 export class PatientCardService {

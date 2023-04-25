@@ -3,7 +3,7 @@ import { FormBuilder, UntypedFormControl, UntypedFormGroup } from "@angular/form
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 
 import { DictionariesService } from "../../../../services";
-import {RUS_PHONE_REGEX} from "../../../../utils/regex";
+import { RUS_PHONE_REGEX } from "../../../../utils";
 
 @Component({
     selector: 'app-new-doctor-dialog',
@@ -13,8 +13,6 @@ import {RUS_PHONE_REGEX} from "../../../../utils/regex";
     providers: [DictionariesService]
 })
 export class NewDoctorDialogComponent implements OnInit {
-    public action!: 'add' | 'edit';
-
     public value: any | null;
 
     public form!: UntypedFormGroup;
@@ -33,7 +31,6 @@ export class NewDoctorDialogComponent implements OnInit {
         private readonly fb: FormBuilder,
         private readonly dictionariesService: DictionariesService,
     ) {
-        this.action = this.data['action'] ?? 'add';
         this.value = this.data['value'] ?? null;
     }
 
@@ -47,12 +44,13 @@ export class NewDoctorDialogComponent implements OnInit {
 
         this.form = this.fb.group(
             {
-                firstname: new UntypedFormControl({ value: value?.firstname ?? null, disabled: false }),
-                lastname: new UntypedFormControl({ value: value?.lastname ?? null, disabled: false }),
-                middlename: new UntypedFormControl({ value: value?.middlename ?? null, disabled: false }),
+                firstName: new UntypedFormControl({ value: value?.firstName ?? null, disabled: false }),
+                lastName: new UntypedFormControl({ value: value?.lastName ?? null, disabled: false }),
+                middleName: new UntypedFormControl({ value: value?.middleName ?? null, disabled: false }),
                 jobPlace: new UntypedFormControl({ value: value?.jobPlace ?? null, disabled: false }),
                 jobTitle: new UntypedFormControl({ value: value?.jobTitle ?? null, disabled: false }),
                 phone: new UntypedFormControl({ value: value?.phone ?? null, disabled: false }),
+                email: new UntypedFormControl({ value: value?.email ?? null, disabled: false }),
             }
         );
     }
