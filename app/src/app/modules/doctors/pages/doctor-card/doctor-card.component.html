@@ -6,7 +6,7 @@
     <ng-container *ngIf="(doctor$ | async) as doctor">
         <p-card header="Карточка врача" [style]="{'width': '100%', 'margin-bottom': '2em'}">
             <div class="flex-row">
-                {{ 'ФИО: ' + (doctor | username) }}
+                {{ 'ФИО: ' + (doctor.lastName + ' ' + doctor.firstName + ' ' + doctor.middleName) }}
             </div>
 
             <div class="flex-row">

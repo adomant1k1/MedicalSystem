@@ -2,28 +2,30 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 
 import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
 import { NavbarModule, GlobalHeaderModule } from "./components";
 import { ActiveUserService, LocalStorageService } from "./services";
 import { NotificationModule } from "./components/notification/notification.module";
-import { KeycloakService } from "./services/keycloak.service";
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
-function initializeKeycloak(keycloak: KeycloakService) {
-    return () =>
-        keycloak.init({
-            config: {
-                url: 'http://localhost:8484',
-                realm: 'my_realm',
-                clientId: 'service'
-            },
-            initOptions: {
-                onLoad: 'check-sso',
-                silentCheckSsoRedirectUri:
-                    window.location.origin + '/assets/silent-check-sso.html'
-            }
-        });
+function initializeKeycloak(
+  keycloak: KeycloakService
+) {
+  return () =>
+    keycloak.init({
+      config: {
+        url: 'http://localhost:8484' + '/auth',
+        realm: 'my_realm',
+        clientId: 'service'
+      },
+      initOptions: {
+        checkLoginIframe: false
+      }
+    });
 }
 
 @NgModule({
@@ -31,22 +33,28 @@ function initializeKeycloak(keycloak: KeycloakService) {
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
+        RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledNonBlocking' }),
         GlobalHeaderModule,
         NavbarModule,
+        HttpClientModule,
         NotificationModule,
-
+        KeycloakAngularModule
     ],
   providers: [
       ActiveUserService,
       LocalStorageService,
-      /*KeycloakService,
+      KeycloakService,
       {
-          provide: APP_INITIALIZER,
-          useFactory: initializeKeycloak,
-          multi: true,
-          deps: [KeycloakService]
-      }*/
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthInterceptor,
+        multi: true
+      },
+      {
+        provide: APP_INITIALIZER,
+        useFactory: initializeKeycloak,
+        deps: [KeycloakService],
+        multi: true
+      }
   ],
   bootstrap: [AppComponent],
 })

@@ -19,14 +19,15 @@
     "@angular/platform-browser": "~14.2.0",
     "@angular/platform-browser-dynamic": "~14.2.0",
     "@angular/router": "~14.2.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
+    "keycloak-js": "^21.0.0",
+    "keycloak-angular": "^12.1.0",
     "primeicons": "^6.0.1",
     "primeng": "^14.1.4",
-    "keycloak-js": "^18.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.11.4",
-    "jspdf": "^2.5.1",
-    "html2canvas": "^1.4.1"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~14.2.0",
@@ -36,7 +37,7 @@
     "@angular/cli": "~14.2.0",
     "@angular/compiler-cli": "~14.2.0",
     "@angular/language-service": "~14.2.0",
-    "@nrwl/angular": "^14.8.4",
+    "@nrwl/angular": "^15.9.2",
     "@nrwl/cli": "14.8.4",
     "@nrwl/cypress": "14.8.4",
     "@nrwl/eslint-plugin-nx": "14.8.4",

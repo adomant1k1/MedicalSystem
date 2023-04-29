@@ -1,7 +1,7 @@
 <ng-container *ngIf="(profile$ | async) as profile">
     <p-card header="Личные данные" [style]="{'width': '100%', 'margin-bottom': '2em'}">
         <div class="flex-row">
-            {{ 'ФИО: ' + (profile | username) }}
+            {{ 'ФИО: ' + (profile.lastName + ' ' + profile.firstName + ' ' + profile.middleName) }}
         </div>
 
         <div *ngIf="profile.birthDay" class="flex-row">
@@ -18,6 +18,10 @@
 
         <div *ngIf="profile.phone" class="flex-row">
             {{ 'Телефон: ' + profile.phone }}
+        </div>
+
+        <div *ngIf="profile.email" class="flex-row">
+            {{ 'E-mail: ' + profile.email }}
         </div>
 
         <div *ngIf="profile.jobPlace" class="flex-row">

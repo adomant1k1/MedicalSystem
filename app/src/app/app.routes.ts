@@ -1,4 +1,6 @@
 import { Route } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
+import { AppComponent } from './app.component';
 
 export const appRoutes: Route[] = [
     {
@@ -61,7 +63,6 @@ export const appRoutes: Route[] = [
         title: 'О системе',
         path: 'about',
         loadChildren: () => import('./modules/about/about.module')
-            .then((m) => m.AboutModule),
-        /*canActivate: CanActivateProfile*/
+            .then((m) => m.AboutModule)
     }
 ];

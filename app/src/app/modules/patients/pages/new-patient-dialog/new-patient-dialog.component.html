@@ -12,7 +12,7 @@
                 <mat-form-field>
                     <mat-label>Имя</mat-label>
                     <input matInput
-                           formControlName="firstName">
+                           formControlName="firstName" required='true'>
                 </mat-form-field>
             </div>
 
@@ -20,7 +20,7 @@
                 <mat-form-field>
                     <mat-label>Фамилия</mat-label>
                     <input matInput
-                           formControlName="lastName">
+                           formControlName="lastName" required='true'>
                 </mat-form-field>
             </div>
         </div>
@@ -30,7 +30,7 @@
                 <mat-form-field>
                     <mat-label>Отчество</mat-label>
                     <input matInput
-                           formControlName="middleName">
+                           formControlName="middleName" required='true'>
                 </mat-form-field>
             </div>
         </div>
@@ -44,6 +44,7 @@
                             matInput
                             [matDatepicker]="picker"
                             formControlName="birthDate"
+                            required='true'
                     >
                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
@@ -53,7 +54,7 @@
             <div class="col">
                 <mat-form-field>
                     <mat-label>Пол</mat-label>
-                    <mat-select formControlName="gender">
+                    <mat-select formControlName="gender" required='true'>
                         <mat-option *ngFor="let gender of genders" [value]="gender.value">
                             {{ gender.label }}
                         </mat-option>
@@ -68,7 +69,8 @@
                     <mat-label>ОМС</mat-label>
                     <input matInput
                            [maxLength]="16"
-                           formControlName="oms">
+                           formControlName="oms"
+                           required='true'>
                 </mat-form-field>
             </div>
         </div>
@@ -79,7 +81,8 @@
                     <mat-label>Телефон</mat-label>
                     <input matInput
                            [pattern]="phoneRegex"
-                           formControlName="phone">
+                           formControlName="phone"
+                           required='true'>
                 </mat-form-field>
             </div>
         </div>
@@ -89,7 +92,8 @@
                 <mat-form-field>
                     <mat-label>Email</mat-label>
                     <input matInput
-                           formControlName="phone">
+                           formControlName="email"
+                           required='true'>
                 </mat-form-field>
             </div>
         </div>

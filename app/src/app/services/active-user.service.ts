@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 
 import { RolesTypes } from "../types";
+import { User } from '../types/user.types';
 
 const AdminUser = {
     role: RolesTypes.Admin,
@@ -45,7 +46,7 @@ export class ActiveUserService {
         return this._profile$.value;
     }
 
-    public loadProfile(): void {
-        this._profile$.next(AdminUser)
+    public loadProfile(profile: User): void {
+        this._profile$.next(profile)
     }
 }

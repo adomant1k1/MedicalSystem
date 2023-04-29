@@ -6,7 +6,7 @@
     <ng-container *ngIf="(patient$ | async) as patient">
         <p-card header="Карточка пациента" [style]="{'width': '100%', 'margin-bottom': '2em'}">
             <div class="flex-row">
-                {{ 'ФИО: ' + (patient | username) }}
+                {{ 'ФИО: ' + (patient.lastName + ' ' + patient.firstName + ' ' + patient.middleName) }}
             </div>
 
             <div class="flex-row">
@@ -40,17 +40,18 @@
             </div>
         </p-card>
 
-        <div class="flex-row" [style.margin-bottom.px]="24">
-            <button
-                    [style.height.px]="51"
-                    [pTooltip]="'Создать новую анкету'"
-                    pButton
-                    (click)="addNewQuestionnaire()">
-                <mat-icon>add_circle_outline</mat-icon>
-            </button>
-        </div>
-
         <ng-container *ngIf="!isAdmin">
+          <div class="flex-row" [style.margin-bottom.px]="24">
+              <button
+                      [style.height.px]="51"
+                      [pTooltip]="'Создать новую анкету'"
+                      pButton
+                      (click)="addNewQuestionnaire()">
+                  <mat-icon>add_circle_outline</mat-icon>
+              </button>
+          </div>
+
+
             <p-orderList
                     filterBy="id"
                     filterPlaceholder="Фильтровать по ID"
