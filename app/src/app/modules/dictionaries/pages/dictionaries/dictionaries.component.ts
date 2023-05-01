@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { DictionariesService } from "../../../../services";
 import { AddDictionaryItemComponent } from "../add-dictionary-item";
 import { EditDictionaryItemComponent } from "../edit-dictionary-item";
+import { filter } from 'rxjs';
 
 @Component({
     selector: 'app-dictionaries',
@@ -40,6 +41,13 @@ export class DictionariesComponent implements OnInit {
             value: item
         };
         const modalRef = this.dialog.open(EditDictionaryItemComponent, dialogConfig);
+        modalRef.afterClosed()
+          .pipe(
+            filter(it => it !== null && it !== undefined)
+          )
+          .subscribe((closeValue) => {
+              this.service.updateEntity(closeValue);
+          })
     }
 
     public addNew(): void {
@@ -51,5 +59,12 @@ export class DictionariesComponent implements OnInit {
             entity: this.tabIndex === 0 ? 'jobTitle' : 'jobPlace'
         };
         const modalRef = this.dialog.open(AddDictionaryItemComponent, dialogConfig);
+        modalRef.afterClosed()
+          .pipe(
+            filter(it => it !== null && it !== undefined)
+          )
+          .subscribe((closeValue) => {
+              this.service.addEntity(closeValue);
+          })
     }
 }

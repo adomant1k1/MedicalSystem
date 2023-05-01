@@ -1,7 +1,7 @@
-export type RoleType = 'admin' | 'doctor' | 'patient';
+export type RoleType = 'ADMIN' | 'DOCTOR' | 'PATIENT';
 
 export enum RolesTypes {
-    Admin = 'admin',
-    Doctor = 'doctor',
-    Patient = 'patient'
+    Admin = 'ADMIN',
+    Doctor = 'DOCTOR',
+    Patient = 'PATIENT'
 }

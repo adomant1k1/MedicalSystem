@@ -1,6 +1,12 @@
 import { Route } from '@angular/router';
-import { AuthGuard } from './guards/auth.guard';
-import { AppComponent } from './app.component';
+
+import {
+    CanActivateDictionariesGuard,
+    CanActivateDoctorsGuard,
+    CanActivatePatientsGuard,
+    CanActivateQuestionnaireGuard,
+    CanActivateQuestionnairesGuard
+} from './guards';
 
 export const appRoutes: Route[] = [
     {
@@ -8,21 +14,21 @@ export const appRoutes: Route[] = [
         path: 'questionnaires',
         loadChildren: () => import('./modules/questionnaires/questionnaires.module')
             .then((m) => m.QuestionnairesModule),
-        /*canActivate: CanActivateQuestionnaires*/
+        canActivate: [CanActivateQuestionnairesGuard]
     },
     {
         title: 'Пациенты',
         path: 'patients',
         loadChildren: () => import('./modules/patients/patients.module')
             .then((m) => m.PatientsModule),
-        /*canActivate: CanActivatePatients*/
+        canActivate: [CanActivatePatientsGuard]
     },
     {
         title: 'Врачи',
         path: 'doctors',
         loadChildren: () => import('./modules/doctors/doctors.module')
             .then((m) => m.DoctorsModule),
-        /*canActivate: CanActivateDoctors*/
+        canActivate: [CanActivateDoctorsGuard]
     },
     {
         title: 'Личные данные',
@@ -36,31 +42,23 @@ export const appRoutes: Route[] = [
         path: 'questionnaire',
         loadChildren: () => import('./modules/questionnaire/questionnaire.module')
             .then((m) => m.QuestionnaireModule),
-        /*canActivate: CanActivateProfile*/
+        canActivate: [CanActivateQuestionnaireGuard]
     },
     {
         title: 'Справочники',
         path: 'dictionaries',
         loadChildren: () => import('./modules/dictionaries/dictionaries.module')
             .then((m) => m.DictionariesModule),
-        /*canActivate: CanActivateProfile*/
-    },
-    {
-        title: 'Личные данные',
-        path: 'profile',
-        loadChildren: () => import('./modules/profile/profile.module')
-            .then((m) => m.ProfileModule),
-        /*canActivate: CanActivateProfile*/
+        canActivate: [CanActivateDictionariesGuard]
     },
     {
         title: 'Справка',
         path: 'faq',
         loadChildren: () => import('./modules/faq/faq.module')
-            .then((m) => m.FaqModule),
-        /*canActivate: CanActivateProfile*/
+            .then((m) => m.FaqModule)
     },
     {
-        title: 'О системе',
+        title: 'О разработчиках',
         path: 'about',
         loadChildren: () => import('./modules/about/about.module')
             .then((m) => m.AboutModule)

@@ -1,4 +1,4 @@
 export type JobPlaceDto = {
     id: number
-    jobPlace: string;
+    name: string;
 }

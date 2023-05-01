@@ -52,19 +52,32 @@ export class CreateQuestionnaireDialogComponent implements OnInit {
             parameters: this.fb.array([])
         });
         const parameters = form.get('parameters') as UntypedFormArray;
-        (value['parameters'] ?? []).forEach((value: any) => parameters.push(this.fb.group({
-            name: new UntypedFormControl({ value: value.name, disabled: false }),
-            value: new UntypedFormControl({ value: this.action === 'edit'
-                    ? this.value.parameters.find((it: any) => it.title === value.name)?.points
-                    : null, disabled: false
-            }),
-            options: new UntypedFormControl({ value: value.options, disabled: false }),
-        })))
+        if (this.action === 'edit') {
+            (value['parameters'] ?? []).forEach((x: any) => {
+                parameters.push(this.fb.group({
+                    name: new UntypedFormControl({ value: x.name, disabled: false }),
+                    value: new UntypedFormControl({ value: this.value.parameters.find((y: any) => y.title === x.name)?.value, disabled: false }),
+                    options: new UntypedFormControl({ value: x.options, disabled: false }),
+                }));
+            });
+        } else {
+            (value['parameters'] ?? []).forEach((x: any) => parameters.push(this.fb.group({
+                name: new UntypedFormControl({ value:x.name, disabled: false }),
+                value: new UntypedFormControl({ value: null, disabled: false }),
+                options: new UntypedFormControl({ value: x.options, disabled: false }),
+            })));
+        }
+
         this.form = form;
     }
 
     public save(): void {
-        console.log(this.form?.value);
+        const res = this.form?.value['parameters'].map((it: any) => ({
+                title: it.name,
+                value: it.value
+            })
+        );
+        this.dialogRef.close(res);
     }
 
     public close(): void {

@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 
 import { DoctorCardService } from "./services";
 import {EditDoctorDialogComponent} from "../edit-doctor-dialog";
+import { filter } from 'rxjs';
 
 @Component({
     selector: 'app-doctor-card',
@@ -26,7 +27,8 @@ export class DoctorCardComponent implements OnInit {
 
     public ngOnInit(): void {
         this.route.params.subscribe(it => {
-            this.service.loadDoctor(it['id']);
+            this.service.setDoctorId(it['id']);
+            this.service.loadDoctor();
         })
     }
 
@@ -39,5 +41,10 @@ export class DoctorCardComponent implements OnInit {
             value: doctor
         };
         const modalRef = this.dialog.open(EditDoctorDialogComponent, dialogConfig);
+        modalRef.afterClosed()
+          .pipe(
+            filter(it => it !== null && it !== undefined)
+          )
+          .subscribe((response) => this.service.updateDoctor(response));
     }
 }

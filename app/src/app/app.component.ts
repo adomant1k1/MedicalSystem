@@ -5,6 +5,12 @@ import { ActiveUserService } from "./services";
 import { HttpClient } from '@angular/common/http';
 import { User } from './types/user.types';
 
+const roles: Record<string, string> = {
+  ADMIN: 'admin',
+  PATIENT: 'patient',
+  DOCTOR: 'doctor'
+};
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -34,8 +40,8 @@ export class AppComponent implements OnInit {
       const role = this.roles
         .map(it => ['ADMIN', 'DOCTOR', 'PATIENT'].includes(it) ? it : null)
         .filter(x => x);
-      this.http.get<User>('http://localhost:4000/user-service/admin/me', {})
-        .subscribe((it: User)=> this.userService.loadProfile(Object.assign({ role }, it)));
+      this.http.get<User>('http://localhost:4000/user-service/' + roles[role[0] as string] + 's/me', {})
+        .subscribe((it: User)=> this.userService.loadProfile(Object.assign({ role: role[0] }, it)));
     } else {
       this.login();
     }
@@ -43,9 +49,5 @@ export class AppComponent implements OnInit {
 
   public login() {
     this.keycloak.login();
-  }
-
-  public logout() {
-    this.keycloak.logout();
   }
 }

@@ -92,8 +92,7 @@ export class QuestionnaireComponent implements OnInit, OnDestroy {
     }
 
     public saveQuestionnaire(): void {
-        console.log(this.form.value);
-        this.notification.showSuccessMessage('kek');
+        this.service.saveQuestionnaire(this.form?.value);
     }
 
     public reset(): void {

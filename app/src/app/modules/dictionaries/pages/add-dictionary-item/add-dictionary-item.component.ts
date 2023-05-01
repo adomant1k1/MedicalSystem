@@ -28,7 +28,7 @@ export class AddDictionaryItemComponent implements OnInit {
     }
 
     public save(): void {
-        console.log(this.form?.value);
+        this.dialogRef.close(Object.assign({ entity: this.entity }, this.form?.value))
     }
 
     public close(): void {

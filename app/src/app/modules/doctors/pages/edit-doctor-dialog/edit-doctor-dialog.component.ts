@@ -47,15 +47,24 @@ export class EditDoctorDialogComponent implements OnInit {
                 firstName: new UntypedFormControl({ value: value?.firstName ?? null, disabled: false }),
                 lastName: new UntypedFormControl({ value: value?.lastName ?? null, disabled: false }),
                 middleName: new UntypedFormControl({ value: value?.middleName ?? null, disabled: false }),
-                jobPlace: new UntypedFormControl({ value: value?.jobPlace ?? null, disabled: false }),
-                jobTitle: new UntypedFormControl({ value: value?.jobTitle ?? null, disabled: false }),
+                jobPlace: new UntypedFormControl({ value: value?.jobPlace?.id ?? null, disabled: false }),
+                jobTitle: new UntypedFormControl({ value: value?.jobTitle?.id ?? null, disabled: false }),
                 phone: new UntypedFormControl({ value: value?.phone ?? null, disabled: false }),
             }
         );
     }
 
     public save(): void {
-        console.log(this.form?.value);
+        const res = this.form?.value;
+        res.jobPlace = {
+            id: res.jobPlace,
+            name: this.dictionariesService.jobPlaceRawData.find(it => it.id === res.jobPlace)?.label ?? ''
+        };
+        res.jobTitle = {
+            id: res.jobTitle,
+            name: this.dictionariesService.jobTitleRawData.find(it => it.id === res.jobTitle)?.label ?? ''
+        };
+        this.dialogRef.close(this.form?.value);
     }
 
     public close(): void {

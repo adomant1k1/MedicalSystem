@@ -19,13 +19,9 @@ export class QuestionnaireCardComponent implements OnInit, OnDestroy {
 
     public readonly questionnaire$ = this.service.questionnaire$;
 
-    private readonly _doctor$ = new BehaviorSubject<DoctorType | null>(null);
+    public readonly doctor$ = this.doctorService.doctor$;
 
-    public readonly doctor$ = this._doctor$.asObservable();
-
-    private readonly _patient$ = new BehaviorSubject<PatientType | null>(null);
-
-    public readonly patient$ = this._patient$.asObservable();
+    public readonly patient$ = this.patientsService.patient$;
 
     @ViewChild('exportData') exportData!: ElementRef;
 
@@ -45,24 +41,24 @@ export class QuestionnaireCardComponent implements OnInit, OnDestroy {
         });
 
         this.service.loadPatient$.pipe(
-            takeUntil(this.destroy$)
-        ).subscribe({
-            next: (id) => {
-                if (typeof id === 'number') {
-                    this._patient$.next(this.patientsService.getPatientById(id));
-                }
-            }
-        })
+             takeUntil(this.destroy$)
+         ).subscribe({
+             next: (id) => {
+                 if (typeof id === 'number') {
+                     this.patientsService.getPatientById(id);
+                 }
+             }
+         })
 
-        this.service.loadDoctor$.pipe(
-            takeUntil(this.destroy$)
-        ).subscribe({
-            next: (id) => {
-                if (typeof id === 'number') {
-                    this._doctor$.next(this.doctorService.getDoctorById(id));
-                }
-            }
-        })
+         this.service.loadDoctor$.pipe(
+             takeUntil(this.destroy$)
+         ).subscribe({
+             next: (id) => {
+                 if (typeof id === 'number') {
+                     this.doctorService.getDoctorById(id);
+                 }
+             }
+         })
     }
 
     public ngOnDestroy(): void {

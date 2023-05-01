@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
-import { take } from "rxjs";
+import { filter, take } from 'rxjs';
 
 import { PatientCardService } from "./services";
 import { ActiveUserService } from "../../../../services";
@@ -36,12 +36,15 @@ export class PatientCardComponent implements OnInit {
     public ngOnInit(): void {
         this.userService.profile$.pipe(
             take(1),
-        ).subscribe(it => this.isAdmin = it.role === RolesTypes.Admin);
+        ).subscribe(it => {
+            this.isAdmin = it.role === RolesTypes.Admin;
+        });
 
         this.route.params.pipe(
             take(1),
         ).subscribe(it => {
-            this.service.loadPatient(it['id']);
+            this.service.setPatientId(it['id'])
+            this.service.loadPatient();
         })
     }
 
@@ -61,6 +64,11 @@ export class PatientCardComponent implements OnInit {
         dialogConfig.autoFocus = true;
         dialogConfig.data = {};
         const modalRef = this.dialog.open(CreateQuestionnaireDialogComponent, dialogConfig)
+        modalRef.afterClosed()
+          .pipe(
+            filter(it => it !== null && it !== undefined)
+          )
+          .subscribe(it => this.service.addNewQuestionnaire(it));
     }
 
     public editQuestionnaire(item: any): void {
@@ -73,6 +81,16 @@ export class PatientCardComponent implements OnInit {
             value: item
         };
         const modalRef = this.dialog.open(CreateQuestionnaireDialogComponent, dialogConfig)
+        modalRef.afterClosed()
+          .pipe(
+            filter(it => it !== null && it !== undefined)
+          )
+          .subscribe((it: any) => this.service.updateQuestionnaire({
+              value: it,
+              patientId: item.patientId,
+              doctorId: item.doctorId,
+              id: item.id
+          }))
     }
 
     public editPatient(patient: any): void {
@@ -84,5 +102,10 @@ export class PatientCardComponent implements OnInit {
             value: patient
         };
         const modalRef = this.dialog.open(EditPatientDialogComponent, dialogConfig);
+        modalRef.afterClosed()
+          .pipe(
+            filter(it => it !== null && it !== undefined)
+          )
+          .subscribe(it => this.service.updatePatient(it))
     }
 }

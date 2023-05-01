@@ -56,7 +56,16 @@ export class NewDoctorDialogComponent implements OnInit {
     }
 
     public save(): void {
-        console.log(this.form?.value);
+        const res = this.form?.value;
+        res.jobPlace = {
+            id: res.jobPlace,
+            name: this.dictionariesService.jobPlaceRawData.find(it => it.id === res.jobPlace)?.label ?? ''
+        };
+        res.jobTitle = {
+            id: res.jobTitle,
+            name: this.dictionariesService.jobTitleRawData.find(it => it.id === res.jobTitle)?.label ?? ''
+        };
+        this.dialogRef.close(res);
     }
 
     public close(): void {

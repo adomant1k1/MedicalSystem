@@ -50,7 +50,9 @@ export class EditPatientDialogComponent implements OnInit {
     }
 
     public save(): void {
-        console.log(this.form?.value);
+      const res = this.form?.value;
+      res['birthDate'] = (res.birthDate as Date).toISOString().slice(0, 10);
+      this.dialogRef.close(this.form?.value);
     }
 
     public close(): void {

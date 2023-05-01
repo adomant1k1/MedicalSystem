@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 
 import { NewDoctorDialogComponent } from "../new-doctor-dialog";
 import { DoctorsService } from "../../../../services";
+import { filter } from 'rxjs';
 
 @Component({
     selector: 'app-doctors',
@@ -41,5 +42,10 @@ export class DoctorsComponent implements OnInit {
             action: 'add'
         };
         const modalRef = this.dialog.open(NewDoctorDialogComponent, dialogConfig);
+        modalRef.afterClosed()
+          .pipe(
+            filter(it => it !== null && it !== undefined)
+          )
+          .subscribe((response) => this.service.addNewDoctor(response));
     }
 }

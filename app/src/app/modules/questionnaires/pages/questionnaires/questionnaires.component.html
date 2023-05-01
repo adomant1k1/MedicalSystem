@@ -20,7 +20,7 @@
                     <span [style.color]="'red'">Старая анкета</span>
                 </ng-container>
 
-                <div class="questionnaire-item-piece">
+                <div *ngIf="isDoctor" class="questionnaire-item-piece">
                     <button
                             tooltipPosition="left"
                             [pTooltip]="'Редактировать анкету'"

@@ -1,5 +1,5 @@
 import { NavbarSection } from "../types";
-import {RolesTypes, RoleType} from "../../../types";
+import { RolesTypes, RoleType } from "../../../types";
 
 export const roleViewsRecord: Record<RoleType, string[]> = {
     [RolesTypes.Admin]: ['patients', 'doctors', 'questionnaire' ,'dictionaries', 'faq', 'about'],
@@ -62,7 +62,7 @@ export const navbarSections: NavbarSection[] = [
             },
             {
                 id: '7',
-                title: 'О системе',
+                title: 'О разработчиках',
                 icon: 'about',
                 route: '/about',
                 visible: true,
